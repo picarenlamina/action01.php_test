@@ -20,6 +20,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
+      - name: Fix permissions for vendor binaries
+        run: chmod +x vendor/bin/phpcs vendor/bin/phpcbf || true
+
       - name: Run PHPCS (manual mode with readable output)
-        run: |
-          vendor/bin/phpcs --standard=PSR12 --report=full src
+        run: vendor/bin/phpcs --standard=PSR12 --report=full src
