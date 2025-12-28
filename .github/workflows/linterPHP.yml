@@ -16,13 +16,10 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
-          tools: phpcs
-          extensions: xml
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
-      - name: Run PHPCS and annotate PR
+      - name: Run PHPCS (manual mode with readable output)
         run: |
-          vendor/bin/phpcs --report=checkstyle --standard=PSR12 src | cs2pr
-
+          vendor/bin/phpcs --standard=PSR12 --report=full src
