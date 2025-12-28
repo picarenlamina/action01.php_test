@@ -39,6 +39,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /var/www/php-html-app
+            cd /var/www/html
             git pull origin main
             composer install --no-dev --optimize-autoloader
