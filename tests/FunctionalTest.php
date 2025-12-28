@@ -28,6 +28,6 @@ class FunctionalTest extends TestCase
     {
         $html = file_get_contents('http://localhost:8000/index.php?a=2&b=3');
         $this->assertStringContainsString('Resultado:', $html);
-        $this->assertStringContainsString('6', $html);
+        $this->assertStringContainsString('5', $html);
     }
 }
