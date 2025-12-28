@@ -1,41 +1,32 @@
-name: Deploy via SFTP
+name: FTP Deploy
 
-
-#desplige manual
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Entorno a desplegar'
-        required: true
-        default: 'production'
-      reason:
-        description: 'Motivo del deploy'
-        required: false
+  push:
+    branches:
+      - main
 
-#despliegue automatico
-#on:
-#  push:
-#   branches:
-#      - main
-      
-      
 jobs:
   deploy:
+    name: Deploy src to html
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      #  Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - run: |
-          composer install
-          vendor/bin/phpunit
-
-      - name: Upload files
-        uses: appleboy/scp-action@v0.1.4
+      # Subir SOLO la carpeta src a html
+      - name: Upload src via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "src"
-          target: "/var/www/html"
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          protocol: ftps        # cambia a ftp si no usas ftps
+          port: 21
+          passive: true
+
+          # folders
+          local-dir: ./src/
+          server-dir: /html/
