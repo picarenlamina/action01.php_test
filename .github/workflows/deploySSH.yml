@@ -1,0 +1,44 @@
+name: Deploy to Server
+
+
+#desplige manual
+on:
+    workflow_dispatch:
+      inputs:
+        environment:
+          description: 'Entorno a desplegar'
+          required: true
+          default: 'production'
+        reason:
+          description: 'Motivo del deploy'
+          required: false
+
+#despliegue automatico
+#on:
+#  push:
+#   branches:
+#      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          composer install
+          vendor/bin/phpunit
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/php-html-app
+            git pull origin main
+            composer install --no-dev --optimize-autoloader
