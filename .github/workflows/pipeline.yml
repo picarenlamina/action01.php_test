@@ -1,0 +1,34 @@
+name: Pipeline Maestro
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ejecutar workflow Linter
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: linterPHP.yml
+          ref: main
+
+  run-tests:
+    runs-on: ubuntu-latest
+    needs: run-linter
+    steps:
+      - name: Ejecutar workflow Tests
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: tests.yml
+          ref: main
+
+  run-deploy:
+    runs-on: ubuntu-latest
+    needs: run-tests
+    steps:
+      - name: Ejecutar workflow Deploy
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: deploySCP.yml
+          ref: main
