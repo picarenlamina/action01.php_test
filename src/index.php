@@ -30,11 +30,11 @@ if (isset($_GET['a'], $_GET['b'])) {
     <button type="submit">Sumar</button>
 </form>
 
-<?php if ($result !== null): ?>
+<?php if ($result !== null) : ?>
 <p><strong>Resultado:</strong> <?= $result ?></p>
 <?php endif; ?>
 
-<?php if ($error): ?>
+<?php if ($error) : ?>
 <p style="color:red"><?= $error ?></p>
 <?php endif; ?>
 </body>

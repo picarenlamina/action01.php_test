@@ -11,5 +11,10 @@ La aplicación muestra una calculadora web sencilla que suma dos números introd
 -- Url
 http://localhost:8000/index.php
 
+
+
 --Ejecucion test 
 #php vendor/bin/phpunit
+
+--Ejecucion linter
+#vendor\bin\phpcs.bat --standard=PSR12 src
