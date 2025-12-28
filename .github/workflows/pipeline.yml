@@ -1,34 +1,51 @@
-name: Pipeline Maestro
+# ---------------------------------------------------------
+# Pipeline Diagram (Mermaid)
+#
+# ```mermaid
+# flowchart TD
+#
+#     L[Linter]:::linter --> T[Tests]:::tests
+#     T --> D[Deploy]:::deploy
+#
+#     classDef linter fill:#ffcc00,stroke:#b38f00,stroke-width:2px,color:#000
+#     classDef tests fill:#66ccff,stroke:#006699,stroke-width:2px,color:#000
+#     classDef deploy fill:#99e699,stroke:#339933,stroke-width:2px,color:#000
+# ```
+#
+# ---------------------------------------------------------
 
-on:
-  workflow_dispatch:
+    name: Pipeline Maestro
 
-jobs:
-  run-linter:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ejecutar workflow Linter
-        uses: peter-evans/workflow-dispatch@v1
-        with:
-          workflow: linterPHP.yml
-          ref: main
-
-  run-tests:
-    runs-on: ubuntu-latest
-    needs: run-linter
-    steps:
-      - name: Ejecutar workflow Tests
-        uses: peter-evans/workflow-dispatch@v1
-        with:
-          workflow: tests.yml
-          ref: main
-
-  run-deploy:
-    runs-on: ubuntu-latest
-    needs: run-tests
-    steps:
-      - name: Ejecutar workflow Deploy
-        uses: peter-evans/workflow-dispatch@v1
-        with:
-          workflow: deploySCP.yml
-          ref: main
+    on:
+      workflow_dispatch:
+    
+    jobs:
+      run-linter:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Ejecutar workflow Linter
+            uses: peter-evans/workflow-dispatch@v1
+            with:
+              workflow: linterPHP.yml
+              ref: main
+    
+      run-tests:
+        runs-on: ubuntu-latest
+        needs: run-linter
+        steps:
+          - name: Ejecutar workflow Tests
+            uses: peter-evans/workflow-dispatch@v1
+            with:
+              workflow: tests.yml
+              ref: main
+    
+      run-deploy:
+        runs-on: ubuntu-latest
+        needs: run-tests
+        steps:
+          - name: Ejecutar workflow Deploy
+            uses: peter-evans/workflow-dispatch@v1
+            with:
+              workflow: deploySCP.yml
+              ref: main
+    
