@@ -7,4 +7,9 @@ class Calculator
     {
         return $a + $b;
     }
+
+    public function div(float $a, float $b): float
+    {
+        return $a / $b;
+    }
 }

@@ -8,6 +8,9 @@
     "psr-4": {
       "App\\": "src/"
     }
+  },
+  "require": {
+    "sentry/sentry": "^4.19",
+    "sentry/sdk": "^4.0"
   }
 }
-
