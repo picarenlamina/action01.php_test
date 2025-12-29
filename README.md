@@ -28,7 +28,7 @@ Este repositorio utiliza un pipeline maestro que ejecuta tres workflows independ
 
 1. **Linter** → `linterPHP.yml`  
 2. **Tests** → `tests.yml`  
-3. **Deploy** → `deploySCP.yml`  
+3. **Deploy** → `deploySSH_SCP.yml`  
 
 El pipeline maestro los ejecuta en orden usando `workflow_dispatch`.
 

@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Deploy to Server (GIT)
 
 
 #desplige manual
@@ -27,10 +27,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run tests
-        run: |
-          composer install
-          vendor/bin/phpunit
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
