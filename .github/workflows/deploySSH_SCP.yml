@@ -28,7 +28,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /var/www/html
-            export COMPOSER_ALLOW_SUPERUSER=1
-            composer install
+           cd /var/www/html
+           composer dump-autoload -o
 
