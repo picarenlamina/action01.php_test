@@ -42,7 +42,6 @@ if (isset($_GET['a'], $_GET['b'])) {
     if (isset($_REQUEST['submit'])) {
         try {
             $result = $calculator->div((float)$_GET['a'], (float)$_GET['b']);
-            
         } catch (Throwable $e) {
             Sentry\captureException($e);
             $error = $e->getMessage();
