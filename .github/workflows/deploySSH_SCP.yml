@@ -29,6 +29,6 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /var/www/html
-            
+            export COMPOSER_ALLOW_SUPERUSER=1
             composer dump-autoload -o
 
