@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/Config/Sentry/bootstrap_sentry.php';
